@@ -13,6 +13,7 @@ app.get('/', function(req, res) {
 io.on('connection', function(socket) {
     socket.on('new message', function(data) {
         io.sockets.emit('message', data);
+
     })
 })
 

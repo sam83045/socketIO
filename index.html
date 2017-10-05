@@ -10,17 +10,10 @@
 
 <body>
     <h1>Broadcast Socket Messages App</h1>
-    <label>loan Offer ID:</label>
-    <input type="text" id="loanOfferId" name="message" />
+    <label>JSON:</label>
+    <textarea id="textData"></textarea>
+
     <br/>
-    <label>Issuer ID:</label>
-    <input type="text" id="issuerId" name="message" />
-    <br/>
-    <label>Action:</label>
-    <input type="text" id="action" name="message" />
-    <br/>
-    <label>Type:</label>
-    <input type="text" id="type" name="message" />
     <br/>
     <input id="submit" type="submit" value="Send Message">
 </body>
@@ -32,15 +25,10 @@
     $(document).ready(function() {
         var socket = io.connect();
         $('#submit').on('click', function() {
-            var obj = {
-                loanOfferId: $('#loanOfferId').val(),
-                issuerId: $('#issuerId').val(),
-                action: $('#action').val(),
-                type: $('#type').val()
-            };
-
-            socket.emit('new message', obj);
-            console.log(obj);
+            var jsonObj = $('#textData').val();
+            jsonObj = JSON.parse(jsonObj);
+            socket.emit('new message', jsonObj);
+            console.log(jsonObj);
         });
     })
 </script>
